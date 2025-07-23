@@ -6,17 +6,20 @@ class Validator:
         self.trained_data = trained_data
         self.df = df
 
-
+    # take a sample of the data
     def sample(self,fraction):
         return self.df.DF.sample(frac=fraction)
 
+    # handle the left data
     @staticmethod
     def left_sample(sample,original):
         return original[~original.index.isin(sample.index)]
 
+    # make data to dict
     @staticmethod
     def data_frame_to_dict(dataframe):
         return dataframe.to_dict('index')
+
 
     def validation(self):
         """ take a sample of data for train the model and check the result """

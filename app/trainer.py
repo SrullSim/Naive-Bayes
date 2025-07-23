@@ -7,26 +7,31 @@ class Trainer:
         self.target_column = target_column
         self.result_dict ={}
 
-
+    # return list of uniq values
     @staticmethod
     def unique_values(dataframe, column):
         return dataframe[column].unique()
 
+    # return amount of uniques
     @staticmethod
     def amount_of_unique_values(dataframe, column, value):
         return float(dataframe.loc[dataframe[column] == value, column].count())
 
+    # return amount of values in column
     @staticmethod
     def amount_of_all_values(dataframe):
         return float(dataframe.shape[0])
 
+    # return a list of columns except the target
     def all_columns(self, classifier):
         columns = self.DF.columns
         return [col for col in columns if col != classifier]
 
+    # split the df according the target
     def split_dataframe_by_value(self, column, value):
         return self.DF.groupby(column).get_group(value)
 
+    # return dict of the columns
     def dict_class(self):
         class_dict = {}
         all_values = self.amount_of_all_values(self.DF)
@@ -35,6 +40,7 @@ class Trainer:
             class_dict[val] = unique_values / all_values
         return class_dict
 
+    # make the big dict with all the probability
     def dict_values(self):
         result = {}
         for val in self.unique_values(self.DF, self.target_column):

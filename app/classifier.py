@@ -7,6 +7,7 @@ class Classifier:
         self.dict_values = self.trained_data.dict_values()
         self.dict_class_values = self.trained_data.dict_class()
 
+    # calculate the probability and return answer
     def probability(self):
         """ calculate the probability for dict of option """
         prob_dict = {}
