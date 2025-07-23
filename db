@@ -1,0 +1,32 @@
+
+id	age	income	student	credit_rating	Buy_Computer
+2	youth	high	no	excellent	no
+6	senior	low	yes	excellent	no
+14	senior	medium	no	excellent	no
+1	youth	high	no	fair	no
+8	youth	medium	no	fair	no
+7	middle_age	low	yes	excellent	yes
+11	youth	medium	yes	excellent	yes
+12	middle_age	medium	no	excellent	yes
+3	middle_age	high	no	fair	yes
+4	senior	medium	no	fair	yes
+5	senior	low	yes	fair	yes
+9	youth	low	yes	fair	yes
+10	senior	medium	yes	fair	yes
+13	middle_age	high	yes	fair	yes
+
+
+def g(url, unique_col):
+    df = pd.read_csv(url)
+
+    df = clean_data(df,"id")
+
+    dict_data = {}
+    for label in df[unique_col].unique():
+        dict_data[label] = {}
+        for col in df.columns.to_list():
+            if label in dict_data[label].keys():
+                dict_data[label][col] = df.groupby([unique_col, col]).size().to_dict()
+            else:
+                dict_data[label][col]={}
+    pprint(dict_data)
