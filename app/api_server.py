@@ -1,17 +1,17 @@
 from fastapi import FastAPI, HTTPException, Query
-from loader import Loader
-from cleaner import Cleaner
-from trainer import Trainer
-from validator import Validator
-from classifier import Classifier
+from app.loader import Loader
+from app.cleaner import Cleaner
+from app.trainer import Trainer
+from app.classifier import Classifier
+from app.validator import Validator
 import uvicorn
 
-FILE_PATH = r"C:\Users\User\Desktop\DATA\Naive-Bayes\data_for_NB_buys_computer-Sheet1.csv"
+FILE_PATH = r"\Naive-Bayes\data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
 
 #  FASTAPI
 app = FastAPI()
-#
+
 
 # run the model
 def run_model(query_dict: dict) -> float:

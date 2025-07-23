@@ -1,8 +1,8 @@
 from loader import Loader
 from cleaner import Cleaner
 from trainer import Trainer
-from validator import Validator
 from classifier import Classifier
+from validator import Validator
 
 FILE_PATH = r"C:\Users\User\Desktop\DATA\Naive-Bayes\data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
@@ -24,7 +24,7 @@ def manager():
 
     # the classifier
 
-    ans = Classifier(validator, QUERY_DICT).probability()
+    ans = Classifier(validator).probability(QUERY_DICT)
     return ans
 
 print(manager())
