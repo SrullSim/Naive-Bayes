@@ -6,7 +6,7 @@ from classifier import Classifier
 from validator import Validator
 import uvicorn
 
-FILE_PATH = r"data/data_for_NB_buys_computer-Sheet1.csv"
+FILE_PATH = r"../data/data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
 
 #  FASTAPI

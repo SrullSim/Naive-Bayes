@@ -1,4 +1,4 @@
-from classifier import Classifier
+from containerB.classifier import Classifier
 
 class Validator:
 
