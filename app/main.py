@@ -4,7 +4,7 @@ from trainer import Trainer
 from classifier import Classifier
 from validator import Validator
 
-FILE_PATH = r"C:\Users\User\Desktop\DATA\Naive-Bayes\data_for_NB_buys_computer-Sheet1.csv"
+FILE_PATH = r"data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
 QUERY_DICT = { "age":"senior","income":"medium","student":"no","credit_rating":"excellent"}
 

@@ -2,11 +2,11 @@ from fastapi import FastAPI, HTTPException, Query
 from app.loader import Loader
 from app.cleaner import Cleaner
 from app.trainer import Trainer
-from app.classifier import Classifier
-from app.validator import Validator
+from classifier import Classifier
+from validator import Validator
 import uvicorn
 
-FILE_PATH = r"\Naive-Bayes\data_for_NB_buys_computer-Sheet1.csv"
+FILE_PATH = r"data/data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
 
 #  FASTAPI
@@ -20,7 +20,7 @@ def run_model(query_dict: dict) -> float:
     trainer = Trainer(cleaned, TARGET_COL)
     dict_prob = trainer.result_dict
     validated_df = Validator(trainer, dict_prob).df
-    result = Classifier(validated_df, query_dict).probability()
+    result = Classifier(validated_df).probability(query_dict)
     return result
 
 @app.get("/predict")
@@ -43,4 +43,4 @@ def predict(
         raise HTTPException(status_code=400, detail=f"שגיאה: {str(e)}")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
