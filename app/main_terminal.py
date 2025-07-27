@@ -1,8 +1,8 @@
 from loader import Loader
 from cleaner import Cleaner
 from trainer import Trainer
-from containerB.classifier import Classifier
-from containerB.validator import Validator
+from classify.classifier import Classifier
+from classify.validator import Validator
 
 FILE_PATH = r"data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"

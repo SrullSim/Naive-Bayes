@@ -4,13 +4,15 @@ from classifier import Classifier
 from validator import Validator
 
 app = FastAPI()
+url = "http://localhost:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
+
 
 @app.get("/predict")
 def predict_query(age: str, income: str, student: str, credit_rating: str):
 
     # get the dict from the model container
     try:
-        resp = requests.get("http://thos.docker.internal:5000/dict")  # הפניה לקונטיינר ראשון הפועל ב-5000
+        resp = requests.get(url)  # הפניה לקונטיינר ראשון הפועל ב-5000
         dict_prob = resp.json()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching dict from model-generator: {e}")
