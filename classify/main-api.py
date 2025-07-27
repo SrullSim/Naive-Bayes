@@ -4,7 +4,7 @@ from classifier import Classifier
 from validator import Validator
 
 app = FastAPI()
-url = "http://model_generator:5000/dict"
+url = "http://localhost:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
 
 
 @app.get("/predict")
