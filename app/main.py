@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from loader import Loader
 from cleaner import Cleaner
@@ -9,9 +10,13 @@ TARGET_COL = "Buy_Computer"
 
 app = FastAPI()
 
-@app.get("/dict")
+@app.get("/get_dict")
 def get_dict():
     df = Loader(FILE_PATH).from_csv_to_df(FILE_PATH)
     cleaned = Cleaner(df, TARGET_COL).df
     trainer = Trainer(cleaned, TARGET_COL)
     return trainer.result_dict
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=5000)

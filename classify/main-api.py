@@ -1,20 +1,26 @@
+import uvicorn
 from fastapi import FastAPI, Query, HTTPException
 import requests
+from urllib3.exceptions import NameResolutionError
+
 from classifier import Classifier
 from validator import Validator
 
 app = FastAPI()
-url = "http://localhost:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
+get_dict_url = "http://model_generator:5000/get_dict"
+
+query_url ="http://127.0.0.1:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
 
 
 @app.get("/predict")
-def predict_query(age: str, income: str, student: str, credit_rating: str):
+def predict_by_query(age: str, income: str, student: str, credit_rating: str):
 
     # get the dict from the model container
     try:
-        resp = requests.get(url)  # הפניה לקונטיינר ראשון הפועל ב-5000
+        resp = requests.get(get_dict_url)  # get the dict from model container
         dict_prob = resp.json()
     except Exception as e:
+        print("except", e)
         raise HTTPException(status_code=500, detail=f"Error fetching dict from model-generator: {e}")
 
     # create the query dict
@@ -30,3 +36,6 @@ def predict_query(age: str, income: str, student: str, credit_rating: str):
     classifier = Classifier(validated_df)
     prediction = classifier.probability(query_dict)
     return {"prediction": prediction}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
