@@ -8,8 +8,7 @@ from validator import Validator
 
 app = FastAPI()
 get_dict_url = "http://model_generator:5000/get_dict"
-
-query_url ="http://127.0.0.1:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
+query_url ="http://0.0.0.0:8080/predict?age=senior&income=medium&student=no&credit_rating=excellent"
 
 
 @app.get("/predict")
@@ -20,7 +19,7 @@ def predict_by_query(age: str, income: str, student: str, credit_rating: str):
         resp = requests.get(get_dict_url)  # get the dict from model container
         dict_prob = resp.json()
     except Exception as e:
-        print("except", e)
+
         raise HTTPException(status_code=500, detail=f"Error fetching dict from model-generator: {e}")
 
     # create the query dict
@@ -38,4 +37,4 @@ def predict_by_query(age: str, income: str, student: str, credit_rating: str):
     return {"prediction": prediction}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)

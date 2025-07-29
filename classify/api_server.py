@@ -8,6 +8,7 @@ import uvicorn
 
 FILE_PATH = r"../data/data_for_NB_buys_computer-Sheet1.csv"
 TARGET_COL = "Buy_Computer"
+query_url ="http://127.0.0.1:8000/predict?age=senior&income=medium&student=no&credit_rating=excellent"
 
 #  FASTAPI
 app = FastAPI()

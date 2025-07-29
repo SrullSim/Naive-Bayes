@@ -1,4 +1,4 @@
-from classify.classifier import Classifier
+import classifier
 
 class Validator:
 
@@ -31,7 +31,7 @@ class Validator:
 
         # create dict for checking
         trial_data = self.left_sample(test_sample,original_dataframe)
-        probability = Classifier(self.df)
+        probability = classifier.Classifier(self.df)
         for k,v in self.data_frame_to_dict(trial_data.drop(self.df.column_to_work_on, axis=1)).items():
             if str(probability.probability(v)) == str(trial_data.loc[k,self.df.column_to_work_on]):
                 right += 1
